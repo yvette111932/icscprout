@@ -1,6 +1,6 @@
 # Weekly Reports
 ## 2024/7/26
-- 学习绘制简单反相器的**电路原理图（schematic）和电路版图（layout）**
+- 基于**Cadence Virtuoso**与**Mentor Calibre**，学习绘制简单反相器的**电路原理图**（schematic）和**电路版图**（layout）
 - 完成**DRC**（运用ADE L生成cdl网表）和**LVS**检查（生成scs网表）
 - 运用**StarRC**完成**寄生参数抽取**（生成spf网表）
 
