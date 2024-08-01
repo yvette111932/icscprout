@@ -6,4 +6,5 @@
 
 ## 2024/8/2
 - 修改网表并用**spectre**完成**后仿**
-- 学习**model**相关（工艺流程CMOS fabrication and layout，logic gates，MOS结构等）
+- 学习**model**相关（工艺流程CMOS fabrication and layout、logic gates、MOS结构、二极管BJT和无源器件passive device工作原理等）
+- 学习使用meqlab
