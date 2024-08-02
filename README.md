@@ -7,4 +7,9 @@
 ## 2024/8/2
 - 修改网表并用**spectre**完成**后仿**
 - 学习**model**相关（工艺流程CMOS fabrication and layout、logic gates、MOS结构、二极管BJT和无源器件passive device工作原理等）
-- 学习使用meqlab
+- 学习使用**MeQlab**
+
+- 学习mos管结构功能等
+- 自己写一版前后仿SOP
+- MeQLab环境配置后操作
+- 振荡器
