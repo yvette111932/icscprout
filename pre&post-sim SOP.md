@@ -6,7 +6,7 @@
 
 在终端输入`virtuoso`打开，在CIW对话框选择*Tools*，*Library Manager*，选择添加的库，选择*cell*，打开电路原理图*schematic*。
 
-<div align=center><img src="https://github.com/user-attachments/assets/49dc184d-ae29-469b-9483-a350787c6035" width=50% height=50%/></div>
+<div align=center><img src="https://github.com/user-attachments/assets/49dc184d-ae29-469b-9483-a350787c6035" width=60% height=60%/></div>
 
 *以简单的反相器电路为例，选择*launch*，*ADE L*，选择*set up*，*stimuli*，修改stimuli信息。选择*gnd*激励源，点击*Enabled*，Function选择*dc*，在DC voltage部分输入*0*。**注意修改完成后需要点击*change*以保存。** 同理，修改*vcc*输入电压为*1.8*。
 接着选择*in*，Function选择*pulse*，Voltage 1初始为0无需修改，修改Voltage 2为*1.8*，将Delay time、Rise time和Fall time均改为*0.1n*。修改Pulse width为*5u*、Period为*10u*，保存后点击*OK*。
