@@ -1,5 +1,5 @@
 > [!TIP]
-> 本教程使用*smic55ll_ulp_09121825_oa_cds_v1.16_2*库，以简单反相器电路为例，整理前仿、DRC验证、LVS验证、寄生参数提取和后仿等流程。需要使用Cadence Virtuoso、Mentor Calibre、StarRC等软件。
+> 本教程使用*smic55ll_ulp_09121825_oa_cds_v1.16_2*库，以简单反相器电路为例，整理前仿、DRC验证、LVS验证、寄生参数提取和后仿等流程。需要使用Cadence Virtuoso、Mentor Calibre、StarRC、Spectre等软件。
 
 # 前仿真
 此步骤建立在电路原理图和cellview已绘制完成，且工艺库已添加的基础上。
@@ -25,7 +25,7 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/f7da72e2-e32b-4589-9fe4-8093ab643fe8" width=60% height=60%/></div>
 
-选择*Simulation*，*Netlist*，*Create*，生成*scs网表*并保存，方便后仿时调用。至此，前仿完成。
+选择*Simulation*，*Netlist*，*Create*，生成*cdl和scs网表*（建议命名为*input.scs*）并保存，方便后仿时调用。至此，前仿完成。
 
 
 # DRC验证
@@ -35,11 +35,11 @@
 
 打开电路版图*layout*，选择*Calibre*，*Run nmDRC*，关闭*Load Runset File*窗口，选择*DRC Rules File*。在*Calibre文件夹*中选择*DRC文件夹*，选择*drc*文件并确定，点击*Run DRC*。
 
-<div align=center><img src="https://github.com/user-attachments/assets/ee703472-69b5-4bbc-8649-dd12b014263a" width=50% height=50%/></div>
+<div align=center><img src="https://github.com/user-attachments/assets/ee703472-69b5-4bbc-8649-dd12b014263a" width=40% height=40%/></div>
 
 根据验证结果修改错误，密度错误可暂时忽略。至此，DRC验证完成。
 
-<div align=center><img src="https://github.com/user-attachments/assets/0b873031-fc80-4f0c-b75e-e64caa5bc7f7" width=60% height=5=60%/></div>
+<div align=center><img src="https://github.com/user-attachments/assets/0b873031-fc80-4f0c-b75e-e64caa5bc7f7" width=60% height=60%/></div>
 
 
 # LVS验证
@@ -49,7 +49,7 @@
 
 打开电路版图*layout*，选择*Calibre*，*Run nmLVS*。同理，选择*LVS Rules File*。出现*√*和*☺*则表示LVS验证通过。至此，DRC验证完成。
 
-<div align=center><img src="https://github.com/user-attachments/assets/08bd844c-fdcb-41c8-810d-227cd6fcf3bd" width=70% height=70%/></div>
+<div align=center><img src="https://github.com/user-attachments/assets/08bd844c-fdcb-41c8-810d-227cd6fcf3bd" width=80% height=80%/></div>
 
 
 # 寄生参数提取
@@ -64,7 +64,6 @@
 - query_cmd文件（同上）
 - nxtgrd文件（在smic库中NXTGRD文件夹内，选择**RCMAX**文件）
 - mapping file（在smic库中找到CCI_StarRC文件夹内的CCI_flow_for_CUI文件夹，选择**tran.map**文件）
-- 
 
 先进行环境配置。打开终端，输入`ls`显示文件夹中所有文件名，输入`vi`打开并修改LVS runset文件。输入`/`搜索要修改的位置，点击`n`跳到下个搜索到的文字，此处可搜索`TOPMETAL`。输入`i`进入insert模式，根据所使用的total metal layer数量修改数字，此处修改为`TOPMETAL 8`。修改TOP_METAL_NUM，可以根据文件夹名*SMIC 1TM*或是*SMIC 2TM*修改为`SINGLE`或是`DOUBLE`。点击*esc*退出编辑模式。
 
@@ -94,7 +93,7 @@
 
 用前面修改好的.lvs规则文件跑一遍版图的lvs，记住需要勾选下图所示选项[^3]，生成svdb文件夹：
 
-<div align=center><img src="https://github.com/user-attachments/assets/ac567737-b73d-4bfd-aee4-1c5f60ee3388" width=50% height=50%/></div>
+<div align=center><img src="https://github.com/user-attachments/assets/ac567737-b73d-4bfd-aee4-1c5f60ee3388" width=70% height=70%/></div>
 
 在终端输入`calibre -query_input query_cmd -query svdb <top_cell>`，修改cell name，生成StarRC output database文件。
 
@@ -103,11 +102,19 @@
 
 # 后仿真
 
+新建文件夹，将后仿生成的*spf*文件和前仿生成的*scs*文件都复制进去。scs文件一般在DRC，Simu，spectre，schematic，netlist中。将*scs*文件中对应于版图cell的模块替代为*spf*，例如此处，将`subckt lxm_JJ_NVLOGIC_ARRAY_FELL_I`模块进行修改，首先将下图圈起部分的*spf*顶层的端口命名顺序修改为与*scs*文件相同。此步骤本例不需要。
 
+<div align=center><img src="https://github.com/user-attachments/assets/5ca103da-5645-41ab-be2b-64acad13c338" width=80% height=80%/></div>
 
+其次在*scs（）文件中将该模块所有部分删除或者注释掉，并修改为：`include xxx.spf`。并在该声明前面添加命令`simulator lang=spice`，在声明结束后添加命令`simulator lang=spectre`[^3]。
 
+打开终端，输入`spectre -raw psf <input.scs> ++aps`，生成psf文件夹，并将相关的波形信息存放于内部，`++aps`是为了加快后仿真的速度。
 
+在*前仿的simulation*文件夹内找到*psf*文件夹（路径同scs文件），并复制内部的*runObjFile*文件到后仿生成的*psf*文件夹内。
 
+打开*virtuoso ADE L*，选择*Tools*，*Results Browser*。选择*File*，*Open Results*，选择后仿生成的*psf文件*并打开。在左侧选择*tran*，便可以查看波形。至此，后仿结束。
+
+<div align=center><img src="https://github.com/user-attachments/assets/53dad37f-143c-4772-9699-57e331281b14" width=70% height=70%/></div>
 
 
 # 参考文献
