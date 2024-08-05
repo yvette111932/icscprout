@@ -41,6 +41,12 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/0b873031-fc80-4f0c-b75e-e64caa5bc7f7" width=60% height=60%/></div>
 
+## 报错及解决方法举例
+- density相关
+  - 忽略
+- GT is enclosed by SN and /or SP
+  - 
+
 
 # LVS验证
 > LVS (Layout Versus Schematic) 验证目的在于检查人工绘制的版图是否和电路结构相符[^1]。
