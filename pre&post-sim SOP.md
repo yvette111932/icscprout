@@ -1,5 +1,5 @@
 > [!TIP]
-> 本教程使用*smic55ll_ulp_09121825_oa_cds_v1.16_2*库，以简单反相器电路为例，整理前仿、DRC验证、LVS验证、寄生参数提取和后仿等流程。需要使用Cadence Virtuoso、Mentor Calibre、StarRC、Spectre等软件。
+> 本学习笔记使用*smic55ll_ulp_09121825_oa_cds_v1.16_2*库，以简单反相器电路为例，整理版图绘制、前仿、DRC验证、LVS验证、寄生参数提取和后仿等流程，。需要使用Cadence Virtuoso、Mentor Calibre、StarRC、Spectre等软件。
 
 # layout设计
 
@@ -20,8 +20,24 @@
 | options -> display -> snap spacing 0.005 | 调整鼠标移动的最小距离 |
 | view -> magnifier | 放大镜 |
 
+## 原理
+| 缩写 | 层和作用[^1] |
+| :---: | :---: |
+| AA | 有源层：源区source，沟道区和漏区drain的合称 |
+| NW | N阱 |
+| SN | N型注入 |
+| SP | P型注入 |
+| GT | 多晶硅 |
+| CT | ？ |
+| M1 ~ M6 | 金属层 |
+
+版图使用p衬底n阱的工艺称为N阱工艺。NMOS沟道是制作在P衬底上，而PMOS沟道是要制作在N阱上[^2]。
+
+<div align=center><img src="https://github.com/user-attachments/assets/10e177a1-fdef-4c84-b48c-7446d3172b09" /></div>
+
 
 # 前仿真
+
 此步骤建立在电路原理图和cellview已绘制完成，且工艺库已添加的基础上。
 
 在终端输入`virtuoso`打开，在CIW对话框选择*Tools*，*Library Manager*，选择添加的库，选择*cell*，打开电路原理图*schematic*。
@@ -49,7 +65,8 @@
 
 
 # DRC验证
-> DRC验证是对设计版图进行检查，以版图层为目标，对相同及相邻版图层之间的关系及尺寸进行规则检查，目的是保证版图满足流片厂家的设计规则[^1]。
+
+> DRC验证是对设计版图进行检查，以版图层为目标，对相同及相邻版图层之间的关系及尺寸进行规则检查，目的是保证版图满足流片厂家的设计规则[^3]。
 
 此步骤建立在电路原理图和电路版图已绘制完成，且工艺库已添加的基础上。
 
@@ -63,7 +80,8 @@
 
 
 # LVS验证
-> LVS (Layout Versus Schematic) 验证目的在于检查人工绘制的版图是否和电路结构相符[^1]。
+
+> LVS (Layout Versus Schematic) 验证目的在于检查人工绘制的版图是否和电路结构相符[^3]。
 
 此步骤建立在电路原理图、电路版图和**cellview**已绘制完成、工艺库已添加，且DRC验证已通过的基础上。
 
@@ -86,7 +104,7 @@
 | `:wq!` | 保存并强制退出 |
 | `:q` | 退出 |
 
-此步骤建立在电路原理图、电路版图和cellview已绘制完成、工艺库已添加，且DRC、LVS验证已通过的基础上。本教程将以CCI StarRC CUI-Flow[^2]为例，即Run StarRC command line file for CUI。
+此步骤建立在电路原理图、电路版图和cellview已绘制完成、工艺库已添加，且DRC、LVS验证已通过的基础上。本教程将以CCI StarRC CUI-Flow[^4]为例，即Run StarRC command line file for CUI。
 
 首先建议新建一个文件夹，在文件夹中复制以下文件进来：
 - CDL netlist（前仿得到）
@@ -123,7 +141,7 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/eb6e34ef-ceb1-4d16-88ba-4b026145a05c" width=70% height=70%/></div>
 
-用前面修改好的.lvs规则文件跑一遍版图的lvs，记住需要勾选下图所示选项[^3]，生成svdb文件夹：
+用前面修改好的.lvs规则文件跑一遍版图的lvs，记住需要勾选下图所示选项[^5]，生成svdb文件夹：
 
 <div align=center><img src="https://github.com/user-attachments/assets/ac567737-b73d-4bfd-aee4-1c5f60ee3388" /></div>
 
@@ -138,7 +156,7 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/5ca103da-5645-41ab-be2b-64acad13c338" /></div>
 
-其次在*scs*文件中将该模块所有部分删除或者注释掉，并修改为：`include xxx.spf`。并在该声明前面添加命令`simulator lang=spice`，在声明结束后添加命令`simulator lang=spectre`[^3]。
+其次在*scs*文件中将该模块所有部分删除或者注释掉，并修改为：`include xxx.spf`。并在该声明前面添加命令`simulator lang=spice`，在声明结束后添加命令`simulator lang=spectre`[^5]。
 
 打开终端，输入`spectre -raw psf <input.scs> ++aps`，生成psf文件夹，并将相关的波形信息存放于内部，`++aps`是为了加快后仿真的速度。
 
@@ -150,6 +168,9 @@
 
 
 # 参考文献
-[^1]: CMOS模拟集成电路版图设计与验证——基于Cadence Virtuoso与Mentor Calibre
-[^2]: Quick-start on SMIC Calibre Connectivity Interface (CCI) - StarRC Flow
-[^3]: StarRC 寄生参数提取与后仿
+
+[^1]: （七）反相器的版图绘制、DRC、LVS、PEX、后仿真笔记-----基于B站chris老师教学
+[^2]: 版图基本知识
+[^3]: CMOS模拟集成电路版图设计与验证——基于Cadence Virtuoso与Mentor Calibre
+[^4]: Quick-start on SMIC Calibre Connectivity Interface (CCI) - StarRC Flow
+[^5]: StarRC 寄生参数提取与后仿
