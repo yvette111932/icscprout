@@ -55,6 +55,8 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/e52299d6-51af-4599-a9eb-cfb701b73bdf" width=50% height=50%/></div>
 
+若不添加激励源，则需直接在电路图上更改并添加激励。建议新建电路图，在symbol上添加激励。
+
 在*set up*，*Model Libraries*中，选择添加Model File。选择添加调用的库文件，**注意需要保持调用的库统一，并取消选择系统初始库，否则可能造成重复define error！** 找到*Models*文件夹，选择*spectre文件*，点击*spe.lib*文件并选择。选择Section为*tt*，点击*OK*。
 
 <div align=center><img src="https://github.com/user-attachments/assets/e31d672a-1ac3-40ed-9d61-472f81a08bdc" /></div>
@@ -91,9 +93,11 @@
 
 此步骤建立在电路原理图、电路版图和**cellview**已绘制完成、工艺库已添加，且DRC验证已通过的基础上。
 
-打开电路版图*layout*，选择*Calibre*，*Run nmLVS*。同理，选择*LVS Rules File*。在相同路径下，选择*sp*文件作为inputs板块的spice files。出现*√*和*☺*则表示LVS验证通过。至此，LVS验证完成。
+打开电路版图*layout*，选择*Calibre*，*Run nmLVS*。同理，在inputs板块选择*LVS Rules File*。在相同路径下，选择*sp*文件作为inputs板块的spice files，注意勾选export from layout viewer，**不**勾选export from schematic viewer。出现*√*和*☺*则表示LVS验证通过，否则根据提示修改。至此，LVS验证完成。
 
 <div align=center><img src="https://github.com/user-attachments/assets/08bd844c-fdcb-41c8-810d-227cd6fcf3bd" /></div>
+
+:hand_over_mouth: 不正规方法仅供参考（当不想直接修改netlist网表时）：在*inputs*的*step*选择netlist extraction*，在*layout*部分修改layout netlist为**cdl**文件。跑一遍lvs导出文件后，再重新选择*step*为*Layout vs Netlist*并改回*sp*文件，选择*netlist*为刚刚导出的cdl文件（注意文件生成的位置在LVS Run Directory处修改），就通过了。
 
 
 # 寄生参数提取
