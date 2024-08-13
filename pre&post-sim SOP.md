@@ -1,5 +1,5 @@
 > [!TIP]
-> 本学习笔记使用*smic55ll_ulp_09121825_oa_cds_v1.16_2*库，以简单反相器电路为例，整理版图绘制、前仿、DRC验证、LVS验证、寄生参数提取和后仿等流程，。需要使用Cadence Virtuoso、Mentor Calibre、StarRC、Spectre等软件。
+> 本学习笔记使用*smic55ll_ulp_09121825_oa_cds_v1.16_2*库，以简单反相器电路为例，整理版图绘制、前仿、DRC验证、LVS验证、寄生参数提取和后仿等流程。需要使用Cadence Virtuoso、Mentor Calibre、StarRC、Spectre等软件。
 
 # layout设计
 
@@ -8,16 +8,21 @@
 | :---: | :---: |
 | f | 居中 |
 | k | 尺子 |
-| s | 极的延长和连接 |
+| c | 复制 |
+| s | 先按后选中边：极的延长；先选中图形边缘：移动（同move） |
 | q | 显示properties |
 | u | 撤回 |
 | r | 生成长方形 |
 | m | 移动 |
 | l | 创建label |
 | a | 对齐 |
+| i | create instance |
+| o | create via (contact) |
+| p | 极的延长 |
+| l | create label(pin) |
 | shift + f | 显示元件内部结构 |
 | shift + c | 裁剪 |
-| options -> display -> snap spacing 0.005 | 调整鼠标移动的最小距离 |
+| options -> display (或直接按e) -> snap spacing 0.005 | 调整鼠标移动的最小距离 |
 | view -> magnifier | 放大镜 |
 
 ## 原理
@@ -35,6 +40,7 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/10e177a1-fdef-4c84-b48c-7446d3172b09" /></div>
 
+绘图需注意design rule!
 
 # 前仿真
 
