@@ -1,5 +1,5 @@
 > [!TIP]
-> 本学习笔记使用*smic55ll_ulp_09121825_oa_cds_v1.16_2*库，以简单反相器电路为例，整理版图绘制、前仿、DRC验证、LVS验证、寄生参数提取和后仿等流程。需要使用Cadence Virtuoso、Mentor Calibre、StarRC、Spectre等软件。
+> 本学习笔记使用*smic55ll_ulp_09121825_oa_cds_v1.16_2*库，用到*SMIC_CCIStarRC_55LLULP_09121825_1P8M_7Ic_1TMc_ALPA1_V1.16_1*等文件，以简单反相器电路为例，整理版图绘制、前仿、DRC验证、LVS验证、寄生参数提取和后仿等流程。需要使用Cadence Virtuoso、Mentor Calibre、StarRC、Spectre等软件。
 
 # layout设计
 
@@ -119,13 +119,13 @@
 首先建议新建一个文件夹，在文件夹中复制以下文件进来：
 - CDL netlist（前仿得到）
 - Calibre_LVS_runset_CCI文件，即SMIC库中的lvs文件
-- layout生成的gds文件（在版图界面选择*File*，*Export Stream from VM*）
-- CCI_cmd文件（在smic库中找到CCI_StarRC文件夹内的CCI_flow_for_CUI文件夹）
+- layout生成的gds文件（在版图界面选择*File*，*Export Stream from VM*；或者在**CIW**界面选择*File*，*Export*，*Stream*，可选择保存路径）
+- CCI_cmd文件（在smic库中找到CCI_StarRC_ALL文件夹内的CCI_flow_for_CUI文件夹）
 - query_cmd文件（同上）
+- mapping file（同上，选择**tran.map**文件）
 - nxtgrd文件（在smic库中NXTGRD文件夹内，选择**RCMAX**文件）
-- mapping file（在smic库中找到CCI_StarRC文件夹内的CCI_flow_for_CUI文件夹，选择**tran.map**文件）
-
-先进行环境配置。打开终端，输入`ls`显示文件夹中所有文件名，输入`vi`打开并修改LVS runset文件。输入`/`搜索要修改的位置，点击`n`跳到下个搜索到的文字，此处可搜索`TOPMETAL`。输入`i`进入insert模式，根据所使用的total metal layer数量修改数字，此处修改为`TOPMETAL 8`。修改TOP_METAL_NUM，可以根据文件夹名*SMIC 1TM*或是*SMIC 2TM*修改为`SINGLE`或是`DOUBLE`。点击*esc*退出编辑模式。
+、/
+先进行环境配置。打开终端，输入`ls`显示文件夹中所有文件名，输入`vi`打开并修改LVS runset文件。输入`/`搜索要修改的位置，点击`n`跳到下个搜索到的文字，此处可搜索`TOPMETAL`。输入`i`进入insert模式，根据所使用的total metal layer数量修改数字，此处修改为`TOPMETAL 8`。修改TOP_METAL_NUM，可以根据文件夹名*SMIC 1TM*或是*SMIC 2TM*修改为`SINGLE`或是`DOUBLE`，此处为*SINGLE*。点击*esc*退出编辑模式。
 
 <div align=center><img src="https://github.com/user-attachments/assets/c2009974-1e0b-4518-94dd-565024fc2a47" width=70% height=70%/></div>
 
@@ -137,7 +137,7 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/a201c216-44df-47d7-8423-59c399217ecb" width=70% height=70%/></div>
 
-修改cdl文件和gds文件的路径和cell name。输入指令`:wq!`强制保存并退出。
+输入指令`:wq!`强制保存并退出。修改cdl文件和gds文件的路径和cell name。
 
 <div align=center><img src="https://github.com/user-attachments/assets/4f65192f-4ef1-4a25-ac85-b7d5c1b5b99f" width=70% height=70%/></div>
 
