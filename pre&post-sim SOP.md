@@ -167,7 +167,7 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/5ca103da-5645-41ab-be2b-64acad13c338" /></div>
 
-其次在*scs*文件中将该模块所有部分删除或者注释掉，并修改为：`include xxx.spf`。并在该声明前面添加命令`simulator lang=spice`，在声明结束后添加命令`simulator lang=spectre`[^5]。
+其次在*scs*文件中将该模块所有部分删除或者注释掉，并在`simulator lang=spectre`后添加`include "xxx.sp"`[^5]，**注意引号**。
 
 打开终端，输入`spectre -raw psf <input.scs> ++aps`，生成psf文件夹，并将相关的波形信息存放于内部，`++aps`是为了加快后仿真的速度。
 
