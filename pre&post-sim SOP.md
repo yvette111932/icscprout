@@ -143,7 +143,7 @@
 
 为防止寄生电容电阻参数被二次提取，在终端输入`calibre -lvs -hier -hcell hcell_list \u2013spice ./svdb/<top_cell>.sp <Calibre_LVS_runset_CCI>`，注意替换top cell为cell name，Calibre_LVS_runset_CCI为LVS runset file文件名。注意此处command为case-sensitive。
 
-修改*CCI_cmd*文件，修改为`MAGNIFY_DEVICE_PARAMS: NO`（可能无需修改），`BLOCK: <cell name>`。在`TCAD_GRD_FILE`后修改nxtgrd文件名，在`MAPPING_FILE`后修改map file名字。定义生成的寄生参数文件，以*spf*为后缀。将`CALIBRE_RUNSET`修改为LVS runset文件名。
+修改*CCI_cmd*文件，修改为`MAGNIFY_DEVICE_PARAMS: NO`（可能无需修改），`BLOCK: <cell name>`。在`TCAD_GRD_FILE`后修改nxtgrd文件名，在`MAPPING_FILE`后修改map file名字。定义生成的寄生参数文件，以*spf*为后缀。添加一行`CALIBRE_RUNSET`的定义：LVS runset文件名。
 
 <div align=center><img src="https://github.com/user-attachments/assets/70940332-28c5-4104-b617-e44bb07d7e20" width=70% height=70%/></div>
 
