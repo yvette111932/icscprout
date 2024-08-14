@@ -163,7 +163,7 @@
 
 # 后仿真
 
-新建文件夹，将后仿生成的*spf*文件和前仿生成的*scs*文件都复制进去。scs文件一般在DRC，Simu，spectre，schematic，netlist中。将*scs*文件中对应于版图cell的模块替代为*spf*，例如此处，将`subckt lxm_JJ_NVLOGIC_ARRAY_FELL_I`模块进行修改，首先将下图圈起部分的*spf*顶层的端口命名顺序修改为与*scs*文件相同。此步骤本例不需要。
+新建文件夹，将后仿生成的*spf*文件和前仿生成的*scs*文件都复制进去。scs文件一般在simulation文件夹，spectre，schematic，netlist文件夹中。将*scs*文件中对应于版图cell的模块替代为*spf*，例如此处，将`subckt lxm_JJ_NVLOGIC_ARRAY_FELL_I`模块进行修改，首先将下图圈起部分的*spf*顶层的端口命名顺序修改为与*scs*文件相同。此步骤本例不需要。
 
 <div align=center><img src="https://github.com/user-attachments/assets/5ca103da-5645-41ab-be2b-64acad13c338" /></div>
 
