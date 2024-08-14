@@ -113,6 +113,7 @@
 | `esc` | 退出编辑模式 |
 | `:wq!` | 保存并强制退出 |
 | `:q` | 退出 |
+| `↑` | 上一个指令 |
 
 此步骤建立在电路原理图、电路版图和cellview已绘制完成、工艺库已添加，且DRC、LVS验证已通过的基础上。本教程将以CCI StarRC CUI-Flow[^4]为例，即Run StarRC command line file for CUI。
 
