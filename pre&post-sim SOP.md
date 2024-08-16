@@ -3,28 +3,6 @@
 
 # layout设计
 
-## 基本操作
-| 快捷键 | 作用 |
-| :---: | :---: |
-| f | 居中 |
-| k | 尺子 |
-| c | 复制 |
-| s | 先按后选中边：极的延长；先选中图形边缘：移动（同move） |
-| q | 显示properties |
-| u | 撤回 |
-| r | 生成长方形 |
-| m | 移动 |
-| l | 创建label |
-| a | 对齐 |
-| i | create instance |
-| o | create via (contact) |
-| p | 极的延长 |
-| l | create label(pin) |
-| shift + f | 显示元件内部结构 |
-| shift + c | 裁剪 |
-| options -> display (或直接按e) -> snap spacing 0.005 | 调整鼠标移动的最小距离 |
-| view -> magnifier | 放大镜 |
-
 ## 原理
 Mos管主要分为PMOS和NMOS两种，由于NMOS与PMOS在物理特性上为互补性，因此被称为CMOS。
 
@@ -60,6 +38,27 @@ MOS管有三个极和一个沟道，分别为栅极（gate）、源极（source�
 | CT | ？ |
 | M1 ~ M6 | 金属层 |
 
+## 基本操作
+| 快捷键 | 作用 |
+| :---: | :---: |
+| f | 居中 |
+| k | 尺子 |
+| c | 复制 |
+| s | 先按后选中边：极的延长；先选中图形边缘：移动（同move） |
+| q | 显示properties |
+| u | 撤回 |
+| r | 生成长方形 |
+| m | 移动 |
+| l | 创建label |
+| a | 对齐 |
+| i | create instance |
+| o | create via (contact) |
+| p | 极的延长 |
+| l | create label(pin) |
+| shift + f | 显示元件内部结构 |
+| shift + c | 裁剪 |
+| options -> display (或直接按e) -> snap spacing 0.005 | 调整鼠标移动的最小距离 |
+| view -> magnifier | 放大镜 |
 
 # 前仿真
 
