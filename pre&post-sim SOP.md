@@ -26,7 +26,31 @@
 | view -> magnifier | 放大镜 |
 
 ## 原理
-| 缩写 | 层和作用[^1] |
+Mos管主要分为PMOS和NMOS两种，由于NMOS与PMOS在物理特性上为互补性，因此被称为CMOS。NMOS是栅极高电平（|VGS| > Vt）导通，低电平断开，可用来控制与地之间的导通；PMOS是栅极低电平（|VGS| > Vt）导通，高电平断开，可用来控制与电源之间的导通。
+
+<div align=center><img src="https://github.com/user-attachments/assets/f11758eb-1786-4ea0-a02c-edfeb4ef3caf"width=70% height=70% /></div>.
+
+<div align=center><img src="https://github.com/user-attachments/assets/31f8dc6d-2f69-4472-b12e-80764837a0fd" /></div>.
+
+MOS管有三个极和一个沟道，分别为栅极（gate）、源极（source）、漏极（drain）和N/P沟道。箭头指向G极的是N沟道；箭头背向G极的是P沟道。MOS管中间衬底箭头方向和寄生二极管的箭头方向总是一致的：要么都由S指向D，要么都有D指向S[^1]。
+
+<div align=center><img src="https://github.com/user-attachments/assets/5319a09b-8881-4030-81f7-c6a74dd7ba62"width=50% height=50% /></div>.
+
+以简单反相器为例，它的横截面图如下[^2]。NMOS一般使用p-type基底，PMOS则额外需要n-well。
+
+![image](https://github.com/user-attachments/assets/b9d23c66-1c0e-45b8-9aca-191e107d538f)
+
+其中灰色为n-well，红色横杠为多晶硅（polysilicon），绿色为n+ diffusion，橙色为p+ diffusion，黑色为contact，蓝色为金属。
+
+![image](https://github.com/user-attachments/assets/dd258772-0a56-46a6-8886-9740165fbd9b)
+
+以下为反相器的layout版图示意，在设计时注意遵循design rule。
+
+<div align=center><img src="https://github.com/user-attachments/assets/135629d1-2f63-4e9b-af9c-7ddf5b239d53"width=50% height=50% /></div>.
+
+在virtuoso layout中，每层缩写的意义如下。
+
+| 缩写 | 层和作用[^3] |
 | :---: | :---: |
 | AA | 有源层：源区source，沟道区和漏区drain的合称 |
 | NW | N阱 |
@@ -36,11 +60,6 @@
 | CT | ？ |
 | M1 ~ M6 | 金属层 |
 
-版图使用p衬底n阱的工艺称为N阱工艺。NMOS沟道是制作在P衬底上，而PMOS沟道是要制作在N阱上[^2]。
-
-<div align=center><img src="https://github.com/user-attachments/assets/10e177a1-fdef-4c84-b48c-7446d3172b09" /></div>
-
-绘图需注意design rule!
 
 # 前仿真
 
@@ -74,7 +93,7 @@
 
 # DRC验证
 
-> DRC验证是对设计版图进行检查，以版图层为目标，对相同及相邻版图层之间的关系及尺寸进行规则检查，目的是保证版图满足流片厂家的设计规则[^3]。
+> DRC验证是对设计版图进行检查，以版图层为目标，对相同及相邻版图层之间的关系及尺寸进行规则检查，目的是保证版图满足流片厂家的设计规则[^4]。
 
 此步骤建立在电路原理图和电路版图已绘制完成，且工艺库已添加的基础上。
 
@@ -89,7 +108,7 @@
 
 # LVS验证
 
-> LVS (Layout Versus Schematic) 验证目的在于检查人工绘制的版图是否和电路结构相符[^3]。
+> LVS (Layout Versus Schematic) 验证目的在于检查人工绘制的版图是否和电路结构相符[^4]。
 
 此步骤建立在电路原理图、电路版图和**cellview**已绘制完成、工艺库已添加，且DRC验证已通过的基础上。
 
@@ -115,7 +134,7 @@
 | `:q` | 退出 |
 | `↑` | 上一个指令 |
 
-此步骤建立在电路原理图、电路版图和cellview已绘制完成、工艺库已添加，且DRC、LVS验证已通过的基础上。本教程将以CCI StarRC CUI-Flow[^4]为例，即Run StarRC command line file for CUI。
+此步骤建立在电路原理图、电路版图和cellview已绘制完成、工艺库已添加，且DRC、LVS验证已通过的基础上。本教程将以CCI StarRC CUI-Flow[^5]为例，即Run StarRC command line file for CUI。
 
 首先建议新建一个文件夹，在文件夹中复制以下文件进来：
 - CDL netlist（前仿得到）
@@ -152,7 +171,7 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/eb6e34ef-ceb1-4d16-88ba-4b026145a05c" width=70% height=70%/></div>
 
-用前面修改好的.lvs规则文件跑一遍版图的lvs，记住需要勾选下图所示选项[^5]，生成svdb文件夹：
+用前面修改好的.lvs规则文件跑一遍版图的lvs，记住需要勾选下图所示选项[^6]，生成svdb文件夹：
 
 <div align=center><img src="https://github.com/user-attachments/assets/ac567737-b73d-4bfd-aee4-1c5f60ee3388" /></div>
 
@@ -167,7 +186,7 @@
 
 <div align=center><img src="https://github.com/user-attachments/assets/5ca103da-5645-41ab-be2b-64acad13c338" /></div>
 
-其次在*scs*文件中将该模块所有部分删除或者注释掉，并在`simulator lang=spectre`后添加`include "xxx.sp"`[^5]，**注意引号**。
+其次在*scs*文件中将该模块所有部分删除或者注释掉，并在`simulator lang=spectre`后添加`include "xxx.sp"`[^6]，**注意引号**。
 
 打开终端，输入`spectre -raw psf <input.scs> ++aps`，生成psf文件夹，并将相关的波形信息存放于内部，`++aps`是为了加快后仿真的速度。
 
@@ -180,8 +199,9 @@
 
 # 参考文献
 
-[^1]: （七）反相器的版图绘制、DRC、LVS、PEX、后仿真笔记-----基于B站chris老师教学
-[^2]: 版图基本知识
-[^3]: CMOS模拟集成电路版图设计与验证——基于Cadence Virtuoso与Mentor Calibre
-[^4]: Quick-start on SMIC Calibre Connectivity Interface (CCI) - StarRC Flow
-[^5]: StarRC 寄生参数提取与后仿
+[^1]: NMOS与PMOS的区分及使用
+[^2]: <CMOS VLSI DESIGN>
+[^3]: （七）反相器的版图绘制、DRC、LVS、PEX、后仿真笔记-----基于B站chris老师教学
+[^4]: CMOS模拟集成电路版图设计与验证——基于Cadence Virtuoso与Mentor Calibre
+[^5]: Quick-start on SMIC Calibre Connectivity Interface (CCI) - StarRC Flow
+[^6]: StarRC 寄生参数提取与后仿
