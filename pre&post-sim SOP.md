@@ -26,27 +26,27 @@
 | view -> magnifier | 放大镜 |
 
 ## 原理
-Mos管主要分为PMOS和NMOS两种，由于NMOS与PMOS在物理特性上为互补性，因此被称为CMOS。NMOS是栅极高电平（|VGS| > Vt）导通，低电平断开，可用来控制与地之间的导通；PMOS是栅极低电平（|VGS| > Vt）导通，高电平断开，可用来控制与电源之间的导通。
+Mos管主要分为PMOS和NMOS两种，由于NMOS与PMOS在物理特性上为互补性，因此被称为CMOS。
 
-<div align=center><img src="https://github.com/user-attachments/assets/f11758eb-1786-4ea0-a02c-edfeb4ef3caf"width=70% height=70% /></div>.
+<div align=center><img src="https://github.com/user-attachments/assets/f11758eb-1786-4ea0-a02c-edfeb4ef3caf"width=70% height=70% /></div>
 
-<div align=center><img src="https://github.com/user-attachments/assets/31f8dc6d-2f69-4472-b12e-80764837a0fd" /></div>.
+<div align=center><img src="https://github.com/user-attachments/assets/31f8dc6d-2f69-4472-b12e-80764837a0fd" /></div>
 
-MOS管有三个极和一个沟道，分别为栅极（gate）、源极（source）、漏极（drain）和N/P沟道。箭头指向G极的是N沟道；箭头背向G极的是P沟道。MOS管中间衬底箭头方向和寄生二极管的箭头方向总是一致的：要么都由S指向D，要么都有D指向S[^1]。
+MOS管有三个极和一个沟道，分别为栅极（gate）、源极（source）、漏极（drain）和N/P沟道。。箭头指向G极的是N沟道；箭头背向G极的是P沟道。MOS管中间衬底箭头方向和寄生二极管的箭头方向总是一致的：要么都由S指向D，要么都由D指向S。NMOS是栅极高电平（$`|V_GS| > V_t`$）导通，低电平断开，可用来控制与地之间的导通；PMOS是栅极低电平（$`|V_GS| > VTt`$）导通，高电平断开，可用来控制与电源之间的导通[^1]。
 
-<div align=center><img src="https://github.com/user-attachments/assets/5319a09b-8881-4030-81f7-c6a74dd7ba62"width=50% height=50% /></div>.
+<div align=center><img src="https://github.com/user-attachments/assets/5319a09b-8881-4030-81f7-c6a74dd7ba62"width=50% height=50% /></div>
 
 以简单反相器为例，它的横截面图如下[^2]。NMOS一般使用p-type基底，PMOS则额外需要n-well。
 
-![image](https://github.com/user-attachments/assets/b9d23c66-1c0e-45b8-9aca-191e107d538f)
+<div align=center><img src="https://github.com/user-attachments/assets/b9d23c66-1c0e-45b8-9aca-191e107d538f" /></div>
 
 其中灰色为n-well，红色横杠为多晶硅（polysilicon），绿色为n+ diffusion，橙色为p+ diffusion，黑色为contact，蓝色为金属。
 
-![image](https://github.com/user-attachments/assets/dd258772-0a56-46a6-8886-9740165fbd9b)
+<div align=center><img src="https://github.com/user-attachments/assets/95a3c02e-5d86-403b-9ae7-45900c46c463" /></div>
 
 以下为反相器的layout版图示意，在设计时注意遵循design rule。
 
-<div align=center><img src="https://github.com/user-attachments/assets/135629d1-2f63-4e9b-af9c-7ddf5b239d53"width=50% height=50% /></div>.
+<div align=center><img src="https://github.com/user-attachments/assets/135629d1-2f63-4e9b-af9c-7ddf5b239d53"width=50% height=50% /></div>
 
 在virtuoso layout中，每层缩写的意义如下。
 
@@ -200,7 +200,7 @@ MOS管有三个极和一个沟道，分别为栅极（gate）、源极（source�
 # 参考文献
 
 [^1]: NMOS与PMOS的区分及使用
-[^2]: <CMOS VLSI DESIGN>
+[^2]: CMOS VLSI DESIGN
 [^3]: （七）反相器的版图绘制、DRC、LVS、PEX、后仿真笔记-----基于B站chris老师教学
 [^4]: CMOS模拟集成电路版图设计与验证——基于Cadence Virtuoso与Mentor Calibre
 [^5]: Quick-start on SMIC Calibre Connectivity Interface (CCI) - StarRC Flow
